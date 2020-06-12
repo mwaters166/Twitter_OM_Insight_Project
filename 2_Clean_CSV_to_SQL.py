@@ -6,7 +6,7 @@ import sqlite3
 from sklearn.impute import SimpleImputer
 from sklearn_pandas import DataFrameMapper
 
-conn=sqlite3.connect('twitter_data.db')
+conn=sqlite3.connect('twitter_data_2019_2020.db')
 cursor= conn.cursor()
 users = [
          "barackobama",
@@ -32,7 +32,7 @@ users = [
          "nra",
          "maggieNYT",
          "bariweiss",
-         "washingtonpost",
+         #"washingtonpost",
          "maddow",
          "joenbc",
          "morningmika",
@@ -101,7 +101,7 @@ users = [
          "wellsfargo",
          "equifax",
          "equinox",
-         "papajohns",
+         #"papajohns",
          "gary_kelly",
          "jeffbezos",
          "billgates",
@@ -127,7 +127,7 @@ def assemble_df_list(users):
     end_date="2019-01-01"
     df_list=[]
     for user in users:
-        df=pd.read_csv(f'{username}_{end_date}_present.csv', index_col=0)
+        df=pd.read_csv(f'{user}_{end_date}_present.csv', index_col=0)
         #Remove values where favorite, retweets, or reply count is zero
         df=df[~((df['favorites']==0) | (df['retweets']==0) | (df['reply_count']==0))]
         df['got_ratioed']=df['ratio_comment_like']>=1.5 #True/False values if ratioed (set threshold at 1.5/2)
@@ -159,8 +159,10 @@ def save_cleaned_dfs(df_list):
         clean_df= replace_missing_df(df)
         clean_df_list.append(clean_df)
         #Send cleaned dataframe to SQL database
-        clean_df.to_sql(f'{username}_{end_date}_present.csv', conn, index_label='id', if_exists='replace')
+        clean_df.to_sql(f'{users[i]}_{end_date[:4]}_present', conn, index_label='id', if_exists='replace')
         i+=1
+    merged_df= pd.concat(clean_df_list)
+    merged_df.to_sql(f'merged_twitter_{end_date[:4]}_present', conn, index_label='id', if_exists='replace')
     return "Done!"
 
 save_cleaned_dfs(df_list)
