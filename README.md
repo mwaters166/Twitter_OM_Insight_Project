@@ -1,4 +1,6 @@
-# Twitter_OM_Insight_Project
+![Twitter_OM](https://github.com/mwaters166/Twitter_OM_Insight_Project/blob/master/twit_pic.png)
+
+# Twitter OM
 
 ## Insight Data Science Project by Michele Waters
 
