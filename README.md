@@ -18,5 +18,4 @@
 
 * 5_EDA_Clustering.ipynb : Jupyter notebook for exploratory data analysis (EDA) and KMeans clustering of tweet data in sklearn.
 
-
-
+* 6_NLP_TFIDF_GloVe_Vader_Logistic_Regression_v4.ipynb: Jupyter notebook for preliminary NLP analysis of Ratios using TF-IDF, GloVe, Vader Sentiment Analysis, and Logistic Regression
