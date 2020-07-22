@@ -20,6 +20,7 @@ from spacy.lang.en import English
 import nltk
 from nltk.stem.snowball import SnowballStemmer
 from nltk.stem import WordNetLemmatizer 
+#nltk.download('wordnet')
 from sklearn.linear_model import LogisticRegression
 import pickle
 import streamlit as st
@@ -164,7 +165,6 @@ class Tweet():
         return stem_token_sentences
     @st.cache 
     def lemmatize_sentences(self, token_sentences):
-        nltk.download('wordnet')
         lemmatizer = WordNetLemmatizer() 
         lm_sentences=[]
         for token_sentence in token_sentences:
