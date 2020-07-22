@@ -220,7 +220,7 @@ def run_ratio_detector(percent_prob):
             percent_prob=100
         st.write(f"RATIO DETECTED! You have a {percent_prob}% chance of being ratioed and inciting outrage. Are you sure you'd like to send that tweet?")
     else:
-        if percent_prob>100:
+        if percent_prob<0:
             percent_prob=0
         st.write(f"Ratio Not Detected. You have a {percent_prob}% chance of being ratioed. You're ready to tweet!")
 
