@@ -199,10 +199,10 @@ def glove_scaler(text):
     vector = load_scaler.transform(np.concatenate([word_to_glove_vector(tweet, 200, glove_twitter,'mean') for tweet in text]))
     return vector
 
-#Function to predict probability of being ratioed, using GloVE + Logistic Regression
+#Function to predict probability of being ratioed, using GloVE + Logistic Regression, with residuals predicted by Random Forest
 def add_resid_predictions(account_rf,account_val, clf, vector_X, threshold=0.5):
-    resid_prob_val=account_rf.predict(account_val)
-    new_prob=[val[1] for val in clf.predict_proba(vector_X)]+resid_prob_val
+    resid_prob_val=account_rf.predict(account_val) #residuals predicted by Random Forest
+    new_prob=[val[1] for val in clf.predict_proba(vector_X)]+resid_prob_val #predicted probability from GloVe Logistic Regression added to RF residuals
     new_prob=pd.Series(new_prob).apply(lambda x: x if x>=0 else 0)
     percent_prob= [round(num*100, 2) for num in new_prob]
     pred_new_prob=[]
