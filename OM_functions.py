@@ -20,7 +20,7 @@ from spacy.lang.en import English
 import nltk
 from nltk.stem.snowball import SnowballStemmer
 from nltk.stem import WordNetLemmatizer 
-#nltk.download('wordnet')
+nltk.download('wordnet')
 from sklearn.linear_model import LogisticRegression
 import pickle
 import streamlit as st
