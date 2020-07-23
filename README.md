@@ -4,13 +4,43 @@
 
 ## Insight Data Science Project by Michele Waters
 
-* Goal: Create a tool for business employees to forecast significantly negative responses on Twitter 
+* Goal: Create a tool for business employees to forecast significantly negative responses on Twitter, using a Twitter "Ratio" (the ratio of the number of comments on a tweet compared to the number of 'likes' on a tweet) as a metric.
 
 ### Website:
 
 * Outrage Machine Website: http://winsightanalytics.net:8501/
 
-### Files added:
+### Methods:
+
+* Scraped over 200K tweets from ~January 2019-June 2020 from over 100 verified Twitter users across government, entertainment, industy, and news media using Tweepy.
+
+* Collected Twitter account information (i.e. number of followers, number of public lists, status count, etc.) using Twython/ Twitter api.
+
+* "Ratioed" tweets (tweets with #comments/#likes >1) only represented ~1% of total dataset. Therefore the majority class (non-ratioed tweets) were randomly undersampled to balance the two classes.
+
+* Tweets with <50 comments and over ~200K replies or ~900K likes were excluded from the analysis (these outliers tended to represent extremely positive sentiment).
+
+* Tweet text underwent processing and cleaning by replacing contractions, removing stop words & punctuation, and tokenization & lemmatization using spaCy and nltk. 
+
+* Urls and hashtags were encoded; features for whether a hashtag or url was present, word count, & user category were also included as features
+
+* Experimented with TF-IDF, Vader Sentiment Analysis, and GloVe word embedding with Logistic Regression, Random Forest and LSTM in Jupyter Notebook (descriptions of files in 'Files Added' section below)
+
+### Results: 
+
+* The top 25 features included the # of public lists the user was on, #followers, #statuses, the user category, whether there were hashtags & urls present as well as tweet vectors.
+
+* Vader sentiment analysis demonstrated that ratioed tweets tended to be rated more negatively than non-ratioed tweets, while TF-IDF showed that political words tended to be important features of ratioed tweets. Interestingly, US states of conservative senators (who are ratioed frequently on Twitter) also appeared in the list of top TF-IDF word features.
+
+* After removing highly correlated features and looking at feature importance using the consensus of sklearn and eli5 permutation, it was observed that using only follower count with GloVe tweet vectors allowed for the creation of a simplified model, that did not drastically adversely impact its overall performance.
+
+* The final product (http://winsightanalytics.net:8501/) uses GloVe and Logistic Regression to predict ratios from tweet vectors. This is in combination with a follower count Random Forest model, used to predict the error in the probability of being ratioed. 
+
+* The product was implemented using a Streamlit dashboard, with the final model accounting for >80% accuracy, recall, & precision for validation data.
+
+* Overall, the model performance would likely benefit from having a greater diversity of accounts included in the analysis & a larger collection of ratioed tweets in the training data set. Future iterations of this product may include altering the sampling strategy.
+
+### Files Added:
 
 * 1_Scrape_Tweets_Tweepy.py : Python file to scrape tweets from provided usernames and save as individual csv files using Tweepy. Run from terminal: 'python3 1_Scrape_Tweets_Tweepy.py'
 
