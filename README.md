@@ -62,3 +62,12 @@
 
 * Model Files: 1) GloVe vectors, only for unique words found in training and validation data set: 'unique_glove_vectors.pkl', 2) Assemble/Scale GloVe Vectors: 'glove_scaler.sav', 3) GloVe/Logistic Regression Model: 'glove_clf.sav', 4) Follower count scaler: 'follower_scaler.sav', 5) Follower Count/Random Forest Residual Modification for Logistic Regression Model: 'follower_rf.sav'
 
+### The Twitter Ratio in Popular Culture:
+
+* "The Ratio Establishes Itself on Twitter"-- New York Times: https://www.nytimes.com/interactive/2018/02/09/technology/the-ratio-trends-on-twitter.html
+
+* "How to Know if You've Sent a Horrible Tweet"-- Esquire: https://www.esquire.com/news-politics/news/a54440/twitter-ratio-reply/
+
+* Merriam-Webster: https://www.merriam-webster.com/words-at-play/words-were-watching-ratio-ratioed-ratioing
+
+
