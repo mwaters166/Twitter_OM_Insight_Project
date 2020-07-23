@@ -20,6 +20,8 @@
 
 * "Ratioed" tweets (tweets with #comments/#likes >1) only represented ~1% of total dataset. Therefore the majority class (non-ratioed tweets) were randomly undersampled to balance the two classes.
 
+![Ratio_Distribution](https://github.com/mwaters166/Twitter_OM_Insight_Project/blob/master/Ratio%20Distribution.png)
+
 * Tweet text underwent processing and cleaning by replacing contractions, removing stop words & punctuation, and tokenization & lemmatization using spaCy and nltk. 
 
 * Urls and hashtags were encoded; features for whether a hashtag or url was present, word count, & user category were also included as features
