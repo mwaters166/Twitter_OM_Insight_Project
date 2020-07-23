@@ -16,7 +16,7 @@
 
 * Collected Twitter account information (i.e. number of followers, number of public lists, status count, etc.) using Twython/ Twitter api.
 
-* Tweets with <50 comments and over ~200K replies or ~900K likes were excluded from the analysis (these outliers tended to represent extremely positive sentiment).
+* Tweets with <50 comments and over ~200K replies or ~900K likes were excluded from the analysis (these outliers tended to represent either neutral or extremely positive sentiment).
 
 * "Ratioed" tweets (tweets with #comments/#likes >1) only represented ~1% of total dataset. Therefore the majority class (non-ratioed tweets) were randomly undersampled to balance the two classes.
 
