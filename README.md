@@ -30,7 +30,7 @@
 
 * The top 25 features included the # of public lists the user was on, #followers, #statuses, the user category, whether there were hashtags & urls present as well as tweet vectors.
 
-* Vader sentiment analysis demonstrated that ratioed tweets tended to be rated more negatively than non-ratioed tweets, while TF-IDF showed that political words tended to be important features of ratioed tweets. Interestingly, US states of conservative senators (who are ratioed frequently on Twitter) also appeared in the list of top TF-IDF word features.
+* Vader sentiment analysis demonstrated that ratioed tweets tended to be rated more negatively than non-ratioed tweets, while TF-IDF showed that political words tended to be important features of ratioed tweets. 
 
 * After removing highly correlated features and looking at feature importance using the consensus of sklearn and eli5 permutation, it was observed that using only follower count with GloVe tweet vectors allowed for the creation of a simplified model, that did not drastically adversely impact its overall performance.
 
