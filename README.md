@@ -24,9 +24,9 @@
 
 * Tweet text underwent processing and cleaning by replacing contractions, removing stop words & punctuation, and tokenization & lemmatization using spaCy and nltk. 
 
-* Urls and hashtags were encoded; features for whether a hashtag or url was present, word count, & user category were also included as features
+* Urls and hashtags were encoded; features for whether a hashtag or url was present, word count, & user category were also included as features.
 
-* Experimented with TF-IDF, Vader Sentiment Analysis, and GloVe word embedding with Logistic Regression, Random Forest and LSTM in Jupyter Notebook (descriptions of files in 'Files Added' section below)
+* Experimented with TF-IDF, Vader Sentiment Analysis, and GloVe word embedding with Logistic Regression, Random Forest and LSTM in Jupyter Notebook (descriptions of files in 'Files Added' section below).
 
 ### Results: 
 
@@ -58,7 +58,7 @@
 
 * 7_Twitter_200D_GloVe_LSTM_v2.ipynb: Jupyter notebook for preliminary NLP analysis of Ratios using GloVe LSTM with Keras
 
-* Main Dashboard Files: 1) Dashboard: 'Twitter_Streamlit_Dash.py', 2) Dashboard has dependency on: 'OM_functions.py'
+* Main Dashboard Files: 1) Dashboard: 'Twitter_Streamlit_Dash.py', 2) Dashboard has dependency on: 'OM_functions.py'. Run from terminal: 'streamlit run Twitter_Streamlit_Dash.py'
 
 * Model Files: 1) GloVe vectors, only for unique words found in training and validation data set: 'unique_glove_vectors.pkl', 2) Assemble/Scale GloVe Vectors: 'glove_scaler.sav', 3) GloVe/Logistic Regression Model: 'glove_clf.sav', 4) Follower count scaler: 'follower_scaler.sav', 5) Follower Count/Random Forest Residual Modification for Logistic Regression Model: 'follower_rf.sav'
 
