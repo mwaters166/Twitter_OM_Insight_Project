@@ -44,7 +44,8 @@
 
 ### Files Added:
 
-* 1_Scrape_Tweets_Tweepy.py : Python file to scrape tweets from provided usernames and save as individual csv files using Tweepy. Run from terminal: 'python3 1_Scrape_Tweets_Tweepy.py'
+* 1_Scrape_Tweets_Tweepy_Time_Ids.ipynb: Jupyter notebook outlines process of developing a tweet_id dictionary that corresponds to times and scraping tweets from specific users using Tweepy
+- Note: Originally, GetOldTweets3 was used to obtain tweets for the majority of this project, however support for this tool appears to have ended. Updated tweet scraper files and functions '1_Scrape_Tweets_Tweepy.py' and 'scrape_tweets_tweepy_functions.py' are present in the src folder. These files scrape tweets with Tweepy (which requires Twitter Developer credentials) and can be used by running './run.sh' from command line in main directory. Currently, the run.sh file takes 'users_test.csv' as the input file (which contains two twitter handle examples to scrape) and outputs all tweets to 'tweets.csv'. You can modify 'users_test.csv' with different users or change the run.sh file to collect twitter handles from 'users.csv' to scrape full dataset used in this project.
 
 * 2_Clean_CSV_to_SQL.py : Python file to merge csv files from individual users and save in SQL database. Run from terminal: 'python3 2_Clean_CSV_to_SQL.py'
 
