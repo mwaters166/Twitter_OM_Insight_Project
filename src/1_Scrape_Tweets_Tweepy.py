@@ -10,9 +10,6 @@ from scrape_tweets_tweepy_functions import *
 import sys
 import csv
 
-#Get 
-#users=get_users(file_name='users_test.csv')
-
 #Get input (twitter handles/user list of accounts) & output file (tweets)
 input_users=sys.argv[1] #users.csv or users_test.csv (which is currently the default)
 output_tweet_file=sys.argv[2] #tweets.csv
