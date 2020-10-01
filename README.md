@@ -12,7 +12,7 @@
 
 ### Methods:
 
-* Scraped over 200K tweets from ~January 2019-June 2020 from over 100 verified Twitter users across government, entertainment, industy, and news media using Tweepy.
+* Scraped over 200K tweets from ~January 2019-June 2020 from over 100 verified Twitter users across government, entertainment, industy, and news media using GetOldTweets3 and Tweepy.
 
 * Collected Twitter account information (i.e. number of followers, number of public lists, status count, etc.) using Twython/ Twitter api.
 
