@@ -92,14 +92,16 @@ def scrape_user_tweets(api, user, since_id, until_id):
 def scrape_and_save_tweets_from_user_list(api, user_list, output_file, since_id, until_id):
     for user in user_list:
         tweet_df=scrape_user_tweets(api, user, since_id, until_id) #Scrape tweets
+        if tweet_df.empty: continue
         select_tweet_info=['created_at','id','full_text','entities','in_reply_to_status_id',
                            'in_reply_to_user_id','in_reply_to_screen_name','user',
                            'is_quote_status', 'retweet_count','favorite_count',
                            'favorited','retweeted','lang']
+        select_tweet_df=tweet_df[select_tweet_info]
         if user==user_list[0]:
-            tweet_df[select_tweet_info].to_csv(output_file, index=None)
+            select_tweet_df.to_csv(output_file, index=None)
         else:
-            tweet_df[select_tweet_info].to_csv(output_file, mode='a', header=False, index=None)
+            select_tweet_df.to_csv(output_file, mode='a', header=False, index=None)
         print(f'{user} saved!')
     pass
     
