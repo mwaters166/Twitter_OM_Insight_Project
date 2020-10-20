@@ -11,13 +11,6 @@ specific dates.
 import pandas as pd
 import tweepy
 
-def get_users(file_name):
-    '''
-    Get twitter handles/user names of accounts to scrape
-    '''
-    users=list(pd.read_csv(file_name).users)
-    return users
-
 def get_api_tokens():
     '''
     Get twitter developer keys and tokens
@@ -73,11 +66,10 @@ class Tweepy_User():
         '''
         return pd.DataFrame([self.api.get_status(id=id)._json for id in id_list])
     
-def get_tweepy_date_id(time_id_file='time_ids.csv', date='2/1/2020'):
+def get_tweepy_date_id(loaded_time_df, date='2/1/2020'):
     '''
     Function to return tweet id from given date
     '''
-    loaded_time_df=pd.read_csv(time_id_file, index_col=0)
     time_dict={record['date']:record['id'] for record in loaded_time_df.to_dict('records')}
     if date in time_dict:
         return time_dict[date]
@@ -93,25 +85,25 @@ def get_date_range():
     until_date=input("Enter end date for scraping (e.g. 9/29/2020): ")
     return [since_date, until_date]
 
-def get_date_id(date, time_id_file='time_ids.csv'):
+def get_date_id(date, loaded_time_df):
     '''
     Function to get time id from date
     '''
-    time_id=get_tweepy_date_id(time_id_file, date)
+    time_id=get_tweepy_date_id(loaded_time_df, date)
     if type(time_id) is int:
         return [True, time_id]
     else:
         return [False, 'Try a different date, from 1/1/2020-9/29/2020']
     
-def check_date_validity(since_valid=False, until_valid=False):
+def check_date_validity(loaded_time_df, since_valid=False, until_valid=False):
     '''
     Function to check if date ranges are valid. While either date validity is False, will request
     the user to enter a different date. Valid dates are present in time_ids.csv
     '''
     while since_valid is False or until_valid is False:
         since_date, until_date=get_date_range() #Get dates
-        since_valid, since_id=get_date_id(since_date) #Get date validity and date id for date #1
-        until_valid, until_id=get_date_id(until_date) #Get date validity and date id for date #2
+        since_valid, since_id=get_date_id(since_date, loaded_time_df) #Get date validity and date id for date #1
+        until_valid, until_id=get_date_id(until_date, loaded_time_df) #Get date validity and date id for date #2
         print(f'Date #1 valid?: {since_valid}-->{since_date}: {since_id}; Date #2 valid?: {until_valid}-->{until_date}: {until_id}')
     return [since_id, until_id]
                          
