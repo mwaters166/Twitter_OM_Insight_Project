@@ -1,4 +1,4 @@
-![Twitter_OM](https://github.com/mwaters166/Twitter_OM_Insight_Project/blob/master/twit_pic.png)
+![Twitter_OM](https://github.com/mwaters166/Twitter_OM_Insight_Project/blob/master/images/twit_pic.png)
 
 # Twitter OM
 
@@ -20,7 +20,7 @@
 
 * "Ratioed" tweets (tweets with #comments/#likes >1) only represented ~1% of total dataset (represented in orange and yellow in the figure below [i.e. 'd_log_ratio'>0]). Therefore the majority class (non-ratioed tweets) were randomly undersampled to balance the two classes.
 
-![Ratio_Distribution](https://github.com/mwaters166/Twitter_OM_Insight_Project/blob/master/Ratio%20Distribution.png)
+![Ratio_Distribution](https://github.com/mwaters166/Twitter_OM_Insight_Project/blob/master/images/Ratio%20Distribution.png)
 
 * Tweet text underwent processing and cleaning by replacing contractions, removing stop words & punctuation, and tokenization & lemmatization using spaCy and nltk. 
 
