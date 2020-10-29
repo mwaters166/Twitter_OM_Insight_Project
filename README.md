@@ -46,7 +46,7 @@
 
 * 'final model' folder-- Contains all files needed to run final model (deployed using Streamlit dashboard, run on AWS EC2 using ubuntu). This folder includes the following:
 
-  * Main Dashboard Files: 1) Dashboard: 'Twitter_Streamlit_Dash.py', 2) Dashboard has dependency on: 'OM_functions.py' (all functions related to text processing, vectorization, & running the model), which has dependency on 'Tweet_Class_NLP.py' (tweet class to perfom NLP functions using spaCy and nltk). To run the dashboard locally,(from the final_model folder) run from terminal: 'streamlit run Twitter_Streamlit_Dash.py'
+  * Main Dashboard Files: 1) Dashboard: 'Twitter_Streamlit_Dash.py', 2) Dashboard has dependency on: 'OM_functions.py' (all functions related to text processing, vectorization, & running the model), which has dependency on 'Tweet_Class_NLP.py' (tweet class to perfom NLP functions using spaCy and nltk). To run the dashboard locally,(from the final_model folder) run from terminal: 'streamlit run Twitter_Streamlit_Dash.py'. To install 'requirements.txt', run from terminal: 'pip install -r requirements.txt'
 
   * Model Files: 1) GloVe vectors, only for unique words found in training and validation data set: 'unique_glove_vectors.pkl', 2) Assemble/Scale GloVe Vectors: 'glove_scaler.sav', 3) GloVe/Logistic Regression Model: 'glove_clf.sav', 4) Follower count scaler: 'follower_scaler.sav', 5) Follower Count/Random Forest Residual Modification for Logistic Regression Model: 'follower_rf.sav'
   
