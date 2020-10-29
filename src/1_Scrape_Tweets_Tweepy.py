@@ -27,7 +27,7 @@ tokens=get_api_tokens()
 api=auth_api(tokens[0], tokens[1], tokens[2], tokens[3])
 
 #Import date ids as dataframe
-loaded_time_df=pd.read_csv('time_ids.csv', index_col=0)
+loaded_time_df=pd.read_csv('./time_id_data/time_ids.csv', index_col=0)
 
 #Get date ranges to scrape
 #Example entries: since_date: 9/1/2020 , until_date: 9/29/2020

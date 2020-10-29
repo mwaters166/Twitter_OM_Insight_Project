@@ -44,24 +44,42 @@
 
 ### Files Added:
 
-* 1_Scrape_Tweets_Tweepy_Time_Ids.ipynb: Jupyter notebook outlines process of developing a tweet_id dictionary that corresponds to times and scraping tweets from specific users using Tweepy
-- Note: Originally, GetOldTweets3 was used to obtain tweets for the majority of this project, however support for this tool appears to have ended. Updated tweet scraper files and functions '1_Scrape_Tweets_Tweepy.py' and 'scrape_tweets_tweepy_functions.py' are present in the src folder. These files scrape tweets with Tweepy (which requires Twitter Developer credentials) and can be used by running './run.sh' from command line in main directory. Currently, the run.sh file takes 'users_test.csv' as the input file (which contains two twitter handle examples to scrape) and outputs all tweets to 'tweets.csv'. You can modify 'users_test.csv' with different users or change the run.sh file to collect twitter handles from 'users.csv' to scrape full dataset used in this project.
+* 'final model' folder-- Contains all files needed to run final model (deployed using Streamlit dashboard, run on AWS EC2 using ubuntu). This folder includes the following:
 
-* 2_Clean_CSV_to_SQL.py : Python file to merge csv files from individual users and save in SQL database. Run from terminal: 'python3 2_Clean_CSV_to_SQL.py'
+  * Main Dashboard Files: 1) Dashboard: 'Twitter_Streamlit_Dash.py', 2) Dashboard has dependency on: 'OM_functions.py' (all functions related to text processing, vectorization, & running the model), which has dependency on 'Tweet_Class_NLP.py' (tweet class to perfom NLP functions using spaCy and nltk). To run the dashboard locally,(from the final_model folder) run from terminal: 'streamlit run Twitter_Streamlit_Dash.py'
 
-* 3_Get_Twitter_User_Data_Twython_no_key.py : Python file to get individual twitter user data (i.e. description, follower counts, etc.) using Twython. Requires Twitter developer keys. Run from terminal: '3_Get_Twitter_User_Data_Twython_no_key.py'
+  * Model Files: 1) GloVe vectors, only for unique words found in training and validation data set: 'unique_glove_vectors.pkl', 2) Assemble/Scale GloVe Vectors: 'glove_scaler.sav', 3) GloVe/Logistic Regression Model: 'glove_clf.sav', 4) Follower count scaler: 'follower_scaler.sav', 5) Follower Count/Random Forest Residual Modification for Logistic Regression Model: 'follower_rf.sav'
+  
+* 'src' folder-- Contains files related to scraping tweets. Note: Originally, GetOldTweets3 was used to obtain tweets for the majority of this project, however support for this tool appears to have ended. Updated tweet scraper files include:
+  * '1_Scrape_Tweets_Tweepy.py' and 'scrape_tweets_tweepy_functions.py'. These files scrape tweets with Tweepy (which requires Twitter Developer credentials) and can be used by running './run.sh' from command line in main directory. Currently, the run.sh file takes 'users_test.csv' as the input file (which contains two twitter handle examples to scrape) and outputs all tweets to 'tweets.csv'. You can modify 'users_test.csv' with different users or change the run.sh file to collect twitter handles from 'users.csv' to scrape full dataset used in this project.
+  
+* 'users' folder-- Contains example csv files with twitter handles for Tweepy scraper
 
-* 4_Clean_Text_Label_Categories_Merge_Tables_Data_Manipulation.ipynb : Jupyter notebook for hand-categorizing user accounts, merging tables, label encoding hashtags/urls, and cleaning (tokenizing, stemming, lemmatizing) twitter text data.
+* 'time_id_data' folder-- Contains files required to create 'time_ids.csv', which is a csv file containing tweet ids that correspond to specific dates, to better control time intervals in Tweepy
+  
+* 'tweet_data' folder-- Folder for tweet/Tweepy output to 'tweets.csv'. Contains example output from users_test.csv
 
-* 5_EDA_Clustering.ipynb : Jupyter notebook for exploratory data analysis (EDA) and KMeans clustering of tweet data in sklearn.
+* 'images' folder-- Contains images displayed in repository
 
-* 6_NLP_TFIDF_GloVe_Vader_Logistic_Regression_v4.ipynb: Jupyter notebook for preliminary NLP analysis of Ratios using TF-IDF, GloVe, Vader Sentiment Analysis, and Logistic Regression
+* 'notebooks_cleaning_eda_model_testing' folder-- Jupyter Notebooks and python files for data cleaning, data exploration, and model testing. This folder includes the following:
 
-* 7_Twitter_200D_GloVe_LSTM_v2.ipynb: Jupyter notebook for preliminary NLP analysis of Ratios using GloVe LSTM with Keras
+  * 1_Scrape_Tweets_Tweepy_Time_Ids.ipynb: Jupyter notebook outlines process of developing a tweet_id dictionary that corresponds to times and scraping tweets from specific users using Tweepy
 
-* Main Dashboard Files: 1) Dashboard: 'Twitter_Streamlit_Dash.py', 2) Dashboard has dependency on: 'OM_functions.py'. Run from terminal: 'streamlit run Twitter_Streamlit_Dash.py'
+  * 2_Clean_CSV_to_SQL.py : Python file to merge csv files from individual users and save in SQL database. Run from terminal: 'python3 2_Clean_CSV_to_SQL.py'
 
-* Model Files: 1) GloVe vectors, only for unique words found in training and validation data set: 'unique_glove_vectors.pkl', 2) Assemble/Scale GloVe Vectors: 'glove_scaler.sav', 3) GloVe/Logistic Regression Model: 'glove_clf.sav', 4) Follower count scaler: 'follower_scaler.sav', 5) Follower Count/Random Forest Residual Modification for Logistic Regression Model: 'follower_rf.sav'
+  * 3_Get_Twitter_User_Data_Twython_no_key.py : Python file to get individual twitter user data (i.e. description, follower counts, etc.) using Twython. Requires Twitter developer keys. Run from terminal: '3_Get_Twitter_User_Data_Twython_no_key.py'
+
+  * 4_Clean_Text_Label_Categories_Merge_Tables_Data_Manipulation.ipynb : Jupyter notebook for hand-categorizing user accounts, merging tables, label encoding hashtags/urls, and cleaning (tokenizing, stemming, lemmatizing) twitter text data.
+
+  * 5_EDA_Clustering.ipynb : Jupyter notebook for exploratory data analysis (EDA) and KMeans clustering of tweet data in sklearn.
+
+  * 6_NLP_TFIDF_GloVe_Vader_Logistic_Regression_v4.ipynb: Jupyter notebook for preliminary NLP analysis of Ratios using TF-IDF, GloVe, Vader Sentiment Analysis, and Logistic Regression
+  
+  * 6-5_NLP_GloVe_Vader_Logistic_Regression_Oversample_v5.ipynb: Re-do of Notebook 6 experimenting with oversampling and GloVe-Vader-Logistic Regression model
+
+  * 7_Twitter_200D_GloVe_LSTM_v2.ipynb: Jupyter notebook for preliminary NLP analysis of Ratios using GloVe LSTM with Keras
+  
+  * 8_Twitter_OM_PySpark_SQL.ipynb: Jupyter notebook for preliminary experimentation in PySpark/SQL and examination of users associated with ratioed tweets
 
 ### The Twitter Ratio in Popular Culture:
 
