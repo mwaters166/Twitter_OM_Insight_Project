@@ -8,7 +8,6 @@ By Michele Waters
 Streamlit Dashboard
 '''
 import streamlit as st
-import pandas
 import time
 from PIL import Image
 from OM_functions import *
