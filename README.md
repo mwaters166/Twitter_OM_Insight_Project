@@ -72,10 +72,8 @@
   * 4_Clean_Text_Label_Categories_Merge_Tables_Data_Manipulation.ipynb : Jupyter notebook for hand-categorizing user accounts, merging tables, label encoding hashtags/urls, and cleaning (tokenizing, stemming, lemmatizing) twitter text data.
 
   * 5_EDA_Clustering.ipynb : Jupyter notebook for exploratory data analysis (EDA) and KMeans clustering of tweet data in sklearn.
-
-  * 6_NLP_TFIDF_GloVe_Vader_Logistic_Regression_v4.ipynb: Jupyter notebook for preliminary NLP analysis of Ratios using TF-IDF, GloVe, Vader Sentiment Analysis, and Logistic Regression
   
-  * 6-5_NLP_GloVe_Vader_Logistic_Regression_Oversample_v5.ipynb: Re-do of Notebook 6 experimenting with oversampling and GloVe-Vader-Logistic Regression model
+  * 6-5_NLP_GloVe_Vader_Logistic_Regression_Oversample_v5.ipynb: Jupyter notebook for preliminary NLP analysis of Ratios, experimenting with oversampling and GloVe-Vader Sentiment Analysis-Logistic Regression model
 
   * 7_Twitter_200D_GloVe_LSTM_v2.ipynb: Jupyter notebook for preliminary NLP analysis of Ratios using GloVe LSTM with Keras
   
