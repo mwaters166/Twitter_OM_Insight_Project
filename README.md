@@ -78,6 +78,8 @@
   * 7_Twitter_200D_GloVe_LSTM_v2.ipynb: Jupyter notebook for preliminary NLP analysis of Ratios using GloVe LSTM with Keras
   
   * 8_Twitter_OM_PySpark_SQL.ipynb: Jupyter notebook for preliminary experimentation in PySpark/SQL and examination of users associated with ratioed tweets
+  
+* 'twitter_trends' folder-- Contains files related to scraping top 50 trending topics in US from trendogate.com using BeautifulSoup. This folder contains 'trends_src/scrape_twitter_trends.py', which has dependency on 'trends_src/twitter_trend_functions.py'. From 'twitter_trends' folder, run from terminal: './run_trends.sh' and enter date interval in format prompted to have top 50 trends saved to 'trend_data/test_twitter_trends.csv' (default from run_trends.sh file). Trend data for 1/01/2019-10/29/2020 can be found in twitter_trends/trend_data/'twitter_trends.csv'.
 
 ### The Twitter Ratio in Popular Culture:
 

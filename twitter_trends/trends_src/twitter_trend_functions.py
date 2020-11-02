@@ -41,9 +41,9 @@ def get_date_interval_list(start_date='2020-06-01', end_date='2020-06-05'):
     return date_list
 
 def save_twitter_trends_date_interval(start_date='2020-06-01', end_date='2020-06-05', place_id='23424977', output_file='./trend_data/twitter_trends.csv'):
-    ''' Uses 'get_twitter_trends' function to return dataframe of top 50 trends for given time interval \
-    [from start date (inclusive) to end date (exclusive)]. Returned dataframe includes a 'date' column \
-    and a 'top_50_trends' column with a list of trends.
+    ''' Uses 'get_twitter_trends' function to save dataframe of top 50 trends for given time interval \
+    [from start date (inclusive) to end date (exclusive)]. Saved dataframe includes a 'date' column \
+    and a 'top_50_trends' column with a list of trends in output file.
     '''
     date_list= get_date_interval_list(start_date, end_date)#get list of dates 
     i=0
