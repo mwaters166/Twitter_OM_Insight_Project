@@ -33,14 +33,19 @@ def get_twitter_trends(date='2020-06-01', place_id='23424977'):
     trend_list=[trend.contents[0].replace('#', '').strip().lower() for trend in parser.select("a[href*=trend]")]
     return trend_list
 
+def get_date_interval_list(start_date='2020-06-01', end_date='2020-06-05'):
+    '''Get list of dates between start date and end date, converted to '2020-06-21' format '''
+    start_dt=dt.datetime.strptime(start_date, '%Y-%m-%d')
+    end_dt=dt.datetime.strptime(end_date, '%Y-%m-%d')
+    date_list=[dt.datetime.strftime(start_dt+dt.timedelta(days=i),'%Y-%m-%d')  for i in range((end_dt-start_dt).days)]
+    return date_list
+
 def save_twitter_trends_date_interval(start_date='2020-06-01', end_date='2020-06-05', place_id='23424977', output_file='./trend_data/twitter_trends.csv'):
     ''' Uses 'get_twitter_trends' function to return dataframe of top 50 trends for given time interval \
     [from start date (inclusive) to end date (exclusive)]. Returned dataframe includes a 'date' column \
     and a 'top_50_trends' column with a list of trends.
     '''
-    start_dt=dt.datetime.strptime(start_date, '%Y-%m-%d') #convert start date to datetime
-    end_dt=dt.datetime.strptime(end_date, '%Y-%m-%d') #convert end date to datetime
-    date_list=[dt.datetime.strftime(start_dt+dt.timedelta(days=i),'%Y-%m-%d')  for i in range((end_dt-start_dt).days)] #get list of dates between start date and end date, converted to '2020-06-21' format
+    date_list= get_date_interval_list(start_date, end_date)#get list of dates 
     i=0
     interval_len=len(date_list)
     for date in date_list:
