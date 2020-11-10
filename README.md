@@ -52,6 +52,7 @@
   
 * 'src' folder-- Contains files related to scraping tweets. Note: Originally, GetOldTweets3 was used to obtain tweets for the majority of this project, however support for this tool appears to have ended. Updated tweet scraper files include:
   * '1_Scrape_Tweets_Tweepy.py' and 'scrape_tweets_tweepy_functions.py'. These files scrape tweets with Tweepy (which requires Twitter Developer credentials) and can be used by running './run.sh' from command line in main directory. Currently, the run.sh file takes 'users_test.csv' as the input file (which contains two twitter handle examples to scrape) and outputs all tweets to 'tweets.csv'. You can modify 'users_test.csv' with different users or change the run.sh file to collect twitter handles from 'users.csv' to scrape full dataset used in this project.
+  * 'example_env.txt' -- example .env file. Before using the running the './run.sh' file you MUST add your Twitter api keys to this file and rename it '.env'. (This replaces previous version, that asked the user to input their api keys.)
   
 * 'users' folder-- Contains example csv files with twitter handles for Tweepy scraper
 

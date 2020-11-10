@@ -10,15 +10,19 @@ specific dates.
 
 import pandas as pd
 import tweepy
+import os
+from dotenv import load_dotenv
+load_dotenv(verbose=True)  # Throws error if it can't find .env file
 
 def get_api_tokens():
     '''
     Get twitter developer keys and tokens
     '''
-    api_key=input('Enter api_key: ')
-    api_secret_key=input('api_secret_key: ')
-    access_token=input('access_token: ')
-    access_token_secret=input('access_token_secret: ')
+    api_key = os.getenv("api_key")
+    api_secret_key = os.getenv("api_secret_key")
+    access_token=os.getenv("access_token")
+    access_token_secret=os.getenv("access_token_secret")
+
     return [api_key, api_secret_key, access_token, access_token_secret]
 
 def auth_api(api_key, api_secret_key, access_token, access_token_secret):
@@ -115,11 +119,11 @@ def scrape_user_tweets(api, user, since_id, until_id):
     tweet_df=tweets.get_user_tweets(since_id=since_id, max_id=until_id)
     return tweet_df
 
-def scrape_and_save_tweets_from_user_list(api, user_list, output_file, since_id, until_id):
+def scrape_and_save_tweets_from_users(api, users, output_file, since_id, until_id):
     '''
     Function to scrape and save tweets in csv files given a list of users
     '''
-    for user in user_list:
+    for user in users:
         tweet_df=scrape_user_tweets(api, user, since_id, until_id) #Scrape tweets
         if tweet_df.empty: continue #skips user if tweets not present in specified date range
         select_tweet_info=['created_at','id','full_text','entities','in_reply_to_status_id',
@@ -127,7 +131,7 @@ def scrape_and_save_tweets_from_user_list(api, user_list, output_file, since_id,
                            'is_quote_status', 'retweet_count','favorite_count',
                            'favorited','retweeted','lang']
         select_tweet_df=tweet_df[select_tweet_info]
-        if user==user_list[0]:
+        if user==users[0]:
             #starts new file for first twitter user in list
             select_tweet_df.to_csv(output_file, index=None) 
         else:

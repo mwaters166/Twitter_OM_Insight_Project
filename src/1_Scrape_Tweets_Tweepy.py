@@ -19,8 +19,7 @@ output_tweet_file=sys.argv[2] #tweets.csv
 #Get list of user names from input file
 users=list(pd.read_csv(input_users).users)
 
-#User input Twitter developer keys and tokens to initialize api
-#Note: do not include quotation marks around keys
+#Get Twitter developer keys and tokens to initialize api from '.env' file defined by user
 tokens=get_api_tokens()
 
 #Initialize Twitter api/Tweepy with keys and tokens
@@ -34,5 +33,5 @@ loaded_time_df=pd.read_csv('./time_id_data/time_ids.csv', index_col=0)
 date_range=check_date_validity(loaded_time_df)
 
 #Scrape and save tweets
-scrape_and_save_tweets_from_user_list(api, user_list=users, output_file=output_tweet_file, since_id=date_range[0], until_id=date_range[1])
+scrape_and_save_tweets_from_users(api, users=users, output_file=output_tweet_file, since_id=date_range[0], until_id=date_range[1])
 

@@ -1,0 +1,5 @@
+pandas
+tweepy
+pytest
+pdb
+python-dotenv
