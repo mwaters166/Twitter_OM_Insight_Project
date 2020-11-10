@@ -1,4 +1,4 @@
-# Keys for Twitter api
+# Add keys for Twitter api, then change the name of this file to '.env'
 api_key=''
 api_secret_key=''
 access_token=''
