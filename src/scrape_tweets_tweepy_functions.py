@@ -10,65 +10,8 @@ specific dates.
 
 import pandas as pd
 import tweepy
-import os
-from dotenv import load_dotenv
-load_dotenv(verbose=True)  # Throws error if it can't find .env file
-
-def get_api_tokens():
-    '''
-    Get twitter developer keys and tokens
-    '''
-    api_key = os.getenv("api_key")
-    api_secret_key = os.getenv("api_secret_key")
-    access_token=os.getenv("access_token")
-    access_token_secret=os.getenv("access_token_secret")
-
-    return [api_key, api_secret_key, access_token, access_token_secret]
-
-def auth_api(api_key, api_secret_key, access_token, access_token_secret):
-    '''
-    Function to authorize api with keys and tokens
-    '''
-    auth = tweepy.OAuthHandler(api_key, api_secret_key)
-    auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth, wait_on_rate_limit=True) 
-    return api
-
-class Tweepy_User():
-    '''
-    Creation of Tweepy class, initialized by api auth and twitter user name/twitter handle
-    '''
-    def __init__(self, api, user_name):
-        self.api=api
-        self.user=api.get_user(user_name)
-        self.id=self.user.id
-        self.follower_num=self.user.followers_count
-        self.friend_num=self.user.friends_count
-        
-    def get_user_info_df(self, result='dictionary'):
-        '''
-        Gets user account information, returning select attributes
-        '''
-        select_attributes=['screen_name','name','id', 'profile_location', 'description',\
-                           'protected','followers_count', 'friends_count', 'listed_count', \
-                           'created_at','profile_image_url','favourites_count','verified', \
-                           'statuses_count','lang']
-        select_info_dict={k:v for k, v in self.user._json.items() if k in select_attributes}
-        if result=='df':
-            select_info_dict=pd.DataFrame(select_info_dict, index=[0])
-        return select_info_dict
-  
-    def get_user_tweets(self, since_id=None, max_id=None, num_tweets=0):
-        '''
-        Gets last ~3200 tweets from user
-        '''
-        return pd.DataFrame([status._json for status in tweepy.Cursor(self.api.user_timeline, id=self.id, since_id=since_id, max_id=max_id, tweet_mode='extended').items(num_tweets)])
-    
-    def get_tweets_from_tweet_id_list(self, id_list=[1308815533052133382]):
-        '''
-        Gets tweets from user from a tweet id list
-        '''
-        return pd.DataFrame([self.api.get_status(id=id)._json for id in id_list])
+from Twitter_User_class import Twitter_User
+from Tweet_Builder_class import Tweet_Builder
     
 def get_tweepy_date_id(loaded_time_df, date='2/1/2020'):
     '''
@@ -115,28 +58,31 @@ def scrape_user_tweets(api, user, since_id, until_id):
     '''
     Function to scrape and return dataframe of tweets for individual users
     '''
-    tweets=Tweepy_User(api, user)
+    tweets=Tweet_Builder(api, user)
     tweet_df=tweets.get_user_tweets(since_id=since_id, max_id=until_id)
     return tweet_df
 
-def scrape_and_save_tweets_from_users(api, users, output_file, since_id, until_id):
+def select_tweet_attributes(attributes=['created_at','id','full_text','entities','in_reply_to_status_id',
+                           'in_reply_to_user_id','in_reply_to_screen_name','user',
+                           'is_quote_status', 'retweet_count','favorite_count',
+                           'favorited','retweeted','lang']):
+    return attributes
+
+def get_select_tweet_df(tweet_df, select_tweet_info):
+    return tweet_df[select_tweet_attributes(select_tweet_info)]
+
+def save_tweets_from_users(select_tweet_df, output_file, user):
+    select_tweet_df.to_csv(output_file, mode='a', header=False, index=None)
+    print(f'{user} saved!')
+
+def run_scrape_save(api, users, output_file, select_tweet_info, since_id, until_id):
     '''
     Function to scrape and save tweets in csv files given a list of users
     '''
+    pd.DataFrame(columns=select_tweet_info).to_csv(output_file, index=None)
     for user in users:
         tweet_df=scrape_user_tweets(api, user, since_id, until_id) #Scrape tweets
         if tweet_df.empty: continue #skips user if tweets not present in specified date range
-        select_tweet_info=['created_at','id','full_text','entities','in_reply_to_status_id',
-                           'in_reply_to_user_id','in_reply_to_screen_name','user',
-                           'is_quote_status', 'retweet_count','favorite_count',
-                           'favorited','retweeted','lang']
-        select_tweet_df=tweet_df[select_tweet_info]
-        if user==users[0]:
-            #starts new file for first twitter user in list
-            select_tweet_df.to_csv(output_file, index=None) 
-        else:
-            #appends to file for subsequent users in user list
-            select_tweet_df.to_csv(output_file, mode='a', header=False, index=None) 
-        print(f'{user} saved!')
-    pass
+        select_tweet_df=get_select_tweet_df(tweet_df, select_tweet_info) #select attributes
+        save_tweets_from_users(select_tweet_df, output_file, user) #save selected tweet dataframe to output file
     
